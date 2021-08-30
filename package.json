@@ -5,8 +5,8 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon --config nodemon.json --exec \"npm run compile:start\"",
-    "dev:debug": "nodemon --config nodemon.json --inspect-brk src/main.ts",
+    "dev": "nodemon",
+    "dev:debug": "nodemon --config nodemon.json --signal SIGHUP --inspect-brk src/main.ts",
     "compile": "tsc --project ./tsconfig.json",
     "compile:start": "tsc --project ./tsconfig.json && npm run start",
     "start": "node ./dist/main.js"
@@ -29,6 +29,10 @@
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "lodash": "^4.17.21",
-    "winston": "^3.3.3"
+    "mongoose": "^6.0.2",
+    "winston": "^3.3.3",
+    "ytdl-core": "^4.9.1",
+    "ytpl": "^2.2.3",
+    "ytsr": "^3.5.3"
   }
 }

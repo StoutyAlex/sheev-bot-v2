@@ -1,3 +1,6 @@
-export const totalShards: string | number = process.env.CONFIG_TOTALSHARDS?.toLowerCase() ?? "auto";
-export const fetchAllUsers = true;
-export const prefix = process.env.CONFIG_PREFIX?.replace(/"/g, "") ?? "sheev "; // Temporary workaround for https://github.com/docker/compose/issues/6951
+import 'dotenv/config';
+
+export const databaseUri: string = process.env.DB_URI!.replace(/<password>/, process.env.DB_PASSWORD!);
+export const prefix: string = 'sheev';
+
+export const environment: 'test' | 'live' = process.env.NODE_ENV === 'development' ? 'test' : 'live';

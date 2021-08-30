@@ -1,6 +1,6 @@
 import { AudioPlayer, AudioPlayerStatus, VoiceConnection } from "@discordjs/voice";
 import { StageChannel, TextChannel, VoiceChannel } from "discord.js";
-import { SongManager } from "../managers/song-handler";
+import { SongManager } from "../managers/song-manager";
 
 export enum loopMode {
     off = 0,
