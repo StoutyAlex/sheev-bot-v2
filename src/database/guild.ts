@@ -11,7 +11,7 @@ interface IGuild extends Document {
 const GuildSchema: Schema = new Schema({
     id: { type: String },
 
-    // membersData: { type: Object, default: {} }, // Members data of the guild
+    membersData: { type: Object, default: {} }, // Members data of the guild
     members: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 
     prefix: { type: String, default: prefix }, // Default or custom prefix of the guild

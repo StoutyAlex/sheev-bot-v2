@@ -34,7 +34,7 @@ class SheevBot extends Client {
         });
 
         // setup intervals
-        setInterval(() => xpLeveler(this), 1000);
+        setInterval(() => xpLeveler(this), 5000);
 
         this.login(token);
         return this;
