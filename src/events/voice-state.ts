@@ -15,8 +15,8 @@ class VoiceState extends Event implements VoiceStateHandler {
     }
 
     async run(oldState: IVoiceState, newState: IVoiceState) {
-        console.log('user changed', oldState.channel?.name, 'to', newState.channel?.name);
-        return;
+        const member = newState.member;
+        if (member && newState) this.client.getUser(member, newState.guild);
     }
 };
 

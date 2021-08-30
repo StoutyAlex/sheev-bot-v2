@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-interface User {
+interface IUser extends Document {
     id: string;
     guildId: string;
     exp: number;
@@ -12,19 +12,20 @@ interface User {
     };
 }
 
-const UserModel = mongoose.model<User>('User', new mongoose.Schema<User>({
-        id: { type: String },
-        guildId: { type: String },
+const UserSchema: Schema = new Schema({
+    id: { type: String },
+    guildId: { type: String },
 
-        exp: { type: Number, default: 0 },
-        level: { type: Number, default: 0 },
+    exp: { type: Number, default: 0 },
+    level: { type: Number, default: 0 },
 
-        registeredAt: { type: Number, default: Date.now() },
+    registeredAt: { type: Number, default: Date.now() },
 
-        cooldowns: {
-            work: 0
-        }
-    })
-);
+    cooldowns: {
+        work: 0
+    }
+})
 
-export { UserModel as User };
+const UserModel = mongoose.model<IUser>('User', UserSchema);
+
+export { UserModel, IUser };

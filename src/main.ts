@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 import { SheevBot } from './base/sheev-bot';
 
 import { databaseUri, environment } from './config';
@@ -9,7 +9,12 @@ const client = new SheevBot();
 
 client.start(process.env.BOT_TOKEN!).then(() => console.log('Logged in'));
 
-mongoose.connect(databaseUri)
+const options: ConnectOptions = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  };
+
+mongoose.connect(databaseUri, options)
     .then(() => {
         console.log('Connected to MongoDB Database');
     })
