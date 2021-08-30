@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import { Readable } from "stream";
 import { SheevBot } from "../sheev-bot";
 
 export interface Command {
@@ -30,3 +31,11 @@ declare module "discord.js" {
         // queue: ServerQueue | null;
     }
 };
+
+export interface Song {
+    id: string;
+    title: string;
+    url: string;
+    thumbnail: string;
+    download(): Readable;
+  }

@@ -1,12 +1,13 @@
 
 import { TextChannel } from 'discord.js';
-import { help, ping } from '../commands';
+import { help, ping, play } from '../commands';
 import { Command, CommandHandler } from '../types';
 
 // Add new commands to the list
 export const commands: Command[] = [
     ping,
-    help
+    help,
+    play,
 ];
 
 const commandHandler: CommandHandler = (client, message) => {
