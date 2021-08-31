@@ -1,14 +1,19 @@
 import { Client, Guild, Intents, User as DiscordUser, GuildMember } from "discord.js";
+import { commands as sheevCommands } from "../commands";
 import * as config from '../config';
 import { GuildModel, IGuild } from "../database/guild";
 import { UserModel, IUser } from "../database/user";
 import { events } from "../events";
 import { xpLeveler } from "../intervals/xp-leveler";
+import { Command } from "./command";
+
 
 class SheevBot extends Client {
     public readonly config = config;
     public readonly usersData = UserModel;
     public readonly guildsData = GuildModel;
+
+    public commands: Command[] = [];
 
     constructor() {
         super({
@@ -27,6 +32,10 @@ class SheevBot extends Client {
     }
 
     async start(token: string) {
+        this.on('ready', () => {
+            this.commands = sheevCommands.map(cmd => new cmd(this));
+        });
+
         Object.entries(events).forEach(([name, handler]) => {
             const eventHandler = new handler(this);
             this.on(name, (...args) => eventHandler.run(...args));
