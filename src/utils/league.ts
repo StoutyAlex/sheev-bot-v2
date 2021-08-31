@@ -12,6 +12,9 @@ export interface MatchSummary {
     a: number;
     role: string;
     lane: string;
+    cs: number;
+    time: number;
+    duration: number;
 }
 
 export interface Champion {
@@ -85,6 +88,9 @@ const generateMatchSummary = (accountId: string, matches: MatchDto[]): MatchSumm
             a: participant.stats.assists,
             role: participant.timeline.role,
             lane: participant.timeline.lane,
+            cs: participant.stats.totalMinionsKilled,
+            time: match.gameCreation,
+            duration: match.gameDuration,
         }
     })
 };

@@ -1,9 +1,10 @@
-import { Message } from "discord.js";
+import { BufferResolvable, Message, MessageAttachment, MessageEmbed } from "discord.js";
 import { create } from "lodash";
 import { Regions } from "twisted/dist/constants";
 import { Command, CommandMeta } from "../base/command";
 import { SheevBot } from "../base/sheev-bot";
 import { createEmbed } from "../utils/create-embed";
+import { createMatchEmbed } from "../utils/html-embed";
 import { getChampionIcon, getForm, getLane, getSummoner, getSummonerIcon } from "../utils/league";
 
 const meta: CommandMeta = {
@@ -44,9 +45,43 @@ class LeagueCommand extends Command {
             });
 
             // const summary = createEmbed('info', `based on your last ${form.length} matches`)
-            //     .addField('Quick Summary', form.map(match => match.win ? ':green_circle:' : ':red_circle:').join(' '), false)
+            //     .addField('Quick Summary', form.map(match => match.win ? ':green_circle:' : ':red_circle:').join(' '), false)]
 
-            return message.channel.send({ embeds: [...embeds] });
+            const embed: MessageEmbed = new MessageEmbed()
+                .setTitle('Your previous 5 Matches')
+                .setColor('BLUE')
+                .setAuthor(user.leagueUser.username!, getSummonerIcon(user.leagueUser.icon!))
+                .setFields([
+                  {
+                    name: `:red_circle: Lux - Normal`,
+                    value: "```Lane: BOT \nK/D/A: 10/2/19```",
+                    inline: false
+                  },
+                  {
+                    name: `:red_circle: Lux - Normal`,
+                    value: "```Lane: BOT \nK/D/A: 10/2/19```",
+                    inline: false
+                  },
+                  {
+                    name: `:green_circle: Lux - Normal`,
+                    value: "```Lane: BOT \nK/D/A: 10/2/19```",
+                    inline: false
+                  },
+                  {
+                    name: `:red_circle: Lux - Normal`,
+                    value: "```Lane: BOT \nK/D/A: 10/2/19```",
+                    inline: false
+                  },
+                  {
+                    name: `:red_circle: Lux - Normal`,
+                    value: "```Lane: BOT \nK/D/A: 10/2/19```",
+                    inline: false
+                  },
+                ]);
+
+            const image = await createMatchEmbed(user.leagueUser.username!, user.leagueUser.icon!, form);
+
+            return message.channel.send({ files: [{ attachment: image }]});
         }
 
         if (subCommand === 'link') {
